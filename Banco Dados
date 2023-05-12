@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema">
+
+  <element name="cidade">
+    <complexType>
+      <sequence>
+        <element name="codigo" type="integer" />
+        <element name="nome" type="string" />
+        <element name="estado" type="string" />
+        <element name="populacao" type="integer" />
+      </sequence>
+      <uniqueConstraint>
+        <selector xpath="restaurante" />
+        <field xpath="@codigo" />
+      </uniqueConstraint>
+    </complexType>
+    <uniqueConstraint>
+      <selector xpath="cidade" />
+      <field xpath="codigo" />
+    </uniqueConstraint>
+  </element>
+
+  <element name="hotel">
+    <complexType>
+      <sequence>
+        <element name="codigo" type="integer" />
+        <element name="nome" type="string" />
+        <element name="endereco" type="string" />
+        <element name="categoria" type="string" />
+        <element name="quartos" type="string" />
+        <element name="numero_quartos" type="integer" />
+        <element name="valor_diaria" type="double" />
+      </sequence>
+      <uniqueConstraint>
+        <selector xpath="restaurante" />
+        <field xpath="@codigo" />
+      </uniqueConstraint>
+    </complexType>
+    <uniqueConstraint>
+      <selector xpath="hotel" />
+      <field xpath="codigo" />
+    </uniqueConstraint>
+  </element>
+
+  <element name="restaurante">
+    <complexType>
+      <sequence>
+        <element name="codigo" type="integer" />
+        <element name="nome" type="string" />
+        <element name="endereco" type="string" />
+        <element name="categoria" type="string" />
+        <element name="hotel_codigo" type="integer" minOccurs="0" />
+      </sequence>
+      <uniqueConstraint>
+        <selector xpath="restaurante" />
+        <field xpath="codigo" />
+      </uniqueConstraint>
+      <uniqueConstraint>
+        <selector xpath="restaurante" />
+        <field xpath="@codigo" />
+      </uniqueConstraint>
+    </complexType>
+  </element>
+
+  <element name="ponto_turistico">
+    <complexType>
+      <sequence>
+        <element name="codigo" type="integer" />
+        <element name="descricao" type="string" />
+        <element name="endereco" type="string" />
+      </sequence>
+      <choice minOccurs="1" maxOccurs="unbounded">
+        <element name="igreja">
+          <complexType>
+            <complexContent>
+              <extension base="ponto_turistico">
+                <sequence>
+                  <element name="data_construcao" type="date" />
+                  <element name="estilo_construcao" type="string" />
+                </sequence>
+              </extension>
+            </complexContent>
+          </complexType>
+        </element>
+        <element name="casa_show">
+          <complexType>
+            <complexContent>
+              <extension base="ponto_turistico">
+                <sequence>
+                  <element name="horario_inicio" type="time
